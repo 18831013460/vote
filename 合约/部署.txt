@@ -1,4 +1,4 @@
-1. 利用truffle将合约部署到geth中
+1. 利用truffle将合约编译部署到geth中
 2.部署后修改js文件webapi中的abi和address为vote合约编译和部署后产生的api和address
-3.开放geth的相关访问权限
+3.开放geth的相关访问权限，同时geth需要创建一个账户，保证账户内有货币。
 4.在浏览器上安装metamask

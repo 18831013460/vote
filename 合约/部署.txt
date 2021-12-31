@@ -1,0 +1,4 @@
+1. 利用truffle将合约部署到geth中
+2.部署后修改js文件webapi中的abi和address
+3.开放geth的相关访问权限
+4.在浏览器上安装metamask

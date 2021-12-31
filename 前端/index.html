@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+    <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+
+    <script type="text/javascript" src="https://unpkg.com/web3@v1.2.6/dist/web3.min.js"></script>
+
+    <link type="text/css" rel="stylesheet"  href="layui/css/layui.css" media="all"/>
+    <script type="text/javascript"src="layui/layui.js" ></script>
+
+    <script type="text/javascript"src="js/webapi.js" ></script>
+    <script type="text/javascript"src="js/doc.js" ></script>
+    <script type="text/javascript"src="js/servive.js" ></script>
+    <script type="text/javascript"src="js/first.js" ></script>
+    <script type="text/javascript"src="js/second.js" ></script>
+    <script type="text/javascript"src="js/third.js" ></script>
+    <script type="text/javascript"src="js/fourth.js" ></script>
+
+</head>
+<body>
+
+<div id="firstDiv" class="layui-container">
+    <div class="layui-card-header"><h1 style="text-align:center">去中心化电子投票系统</h1></div>
+    <hr class="layui-border-red">
+<div   class="layui-container">
+        <div class="layui-btn-container">
+            <div class="layui-row">
+                <button id="addButon" type="button" class="layui-btn layui-col-md3" onclick="firstAddButton()">
+                    <i class="layui-icon">&#xe654;</i>创建
+                </button>
+
+                <button  type="button" class="layui-btn layui-col-md2" onclick="secondviewButton()">查看已创建 </button>
+                <button type="button" class="layui-btn layui-col-md2" onclick="thirdviewButton()">查看已投票</button>
+                <button type="button" class="layui-btn layui-col-md2" onclick="fourthviewButton()">查看投票</button>
+                <button type="button" class="layui-btn layui-col-md2" onclick="fifthMessageButton()">
+                    <i class="layui-icon">&#xe645;</i>权限管理
+                    </button>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+    <div>
+<!--        活动列表，显示活动id，内容，创建者，查看详情-->
+        <table id="firstTable" class="layui-hide"  lay-filter="firstFilter">
+        </table>
+
+        <div id="firstButton" style="display:none;">
+            <button  class="layui-btn layui-btn-sm" type="button"  lay-event="firstVote">
+                <i class="layui-icon">&#xe602;</i>查看
+            </button>
+        </div>
+
+    </div>
+    </div>
+    </div>
+
+
+<div id="secondDiv" class="layui-container" style="display: none">
+      <div>
+          <div class="layui-card-header"><h1 style="text-align:center">去中心化电子投票系统----投票</h1></div>
+          <hr class="layui-border-red">
+          <div>
+              <div class="layui-card">
+                  <div   class="layui-card-header">
+                      <label>序号:  </label>
+                      <label id="secondId">  </label>
+                  </div>
+                  <div  class="layui-card-body">
+                      <label>创建者:  </label>
+                      <label id="secondBuilder">  </label>
+                  </div>
+              </div>
+              <div>
+                  <div class="layui-card-header">
+                      <label>模式：  </label>  <label id="secondMode" >  </label>
+                  </div>
+
+                  </div>
+              <div class="layui-card">
+                  <div  class="layui-card-header">
+                      <label>状态:  </label>
+                      <label id="secondState" > </label>
+                  </div>
+                  <div  class="layui-card-body">
+                      <label>内容:  </label>
+                      <label id="secondContent"> </label>
+                  </div>
+              </div>
+              <!--        编辑活动内容，显示活动创建者（由web3.default获得）-->
+          </div>
+
+
+      </div>
+
+      <table id="secondTable" class="layui-hide"  lay-filter="secondFilter">
+      </table>
+      <div id="voteDiv" style="display:none;">
+            <button  class="layui-btn layui-btn-sm" type="button"  lay-event="secondVote">投票</button>
+      </div>
+    <div  id="secondButton" display="none" >
+<!--        如果不能投票时显示-->
+        <button type="button" class="layui-btn layui-btn-fluid" onclick="require()">申请投票</button>
+    </div>
+    </div>
+
+<div id="thirdDiv" style="display: none" class="layui-container">
+    <div class="layui-card">
+        <div class="layui-card-header"><h1 style="text-align:center">去中心化电子投票系统----创建</h1></div>
+
+    </div>
+    <hr class="layui-border-red">
+    <div>
+        <div class="layui-card">
+            <div id="thirdBuilder" class="layui-card-header">
+                <label>创建者: </label>
+                <label id="thirdBuilderLabel"> </label>
+            </div>
+            <div id="thirdContent" class="layui-card-body">
+                <label>内容</label>
+                <input id="thirdInput" class="layui-input">
+
+            </div>
+        </div>
+        <div class="layui-card">
+            <div id="thirdmode" class="layui-card-header">
+                <label>模式：  </label>
+                <select id="thirdmodeselect" >
+                    <option value="0">授权所有</option>
+                    <option value="1">申请投票</option>
+                </select>
+            </div>
+        </div>
+<!--        编辑活动内容，显示活动创建者（由web3.default获得）-->
+    </div>
+    <div>
+        <table id="thirdTable"  class="layui-hide" lay-filter="thirdFilter">
+
+        </table>
+        <div style="display: none" id="thirdButton">
+            <button  type="button" class="layui-btn" lay-event="thirdAddEvent">
+                <i class="layui-icon">&#xe654;</i>增加</button>
+            <button  type="button" class="layui-btn" lay-event="thirdSubmitEvent">提交</button>
+        </div>
+        <div>
+
+        </div>
+    </div>
+</div>
+
+<div id="fourthDiv" style="display: none" class="layui-container">
+
+    <div class="layui-card-header"><h1 style="text-align:center">去中心化电子投票系统----权限管理</h1></div>
+        <hr class="layui-border-red">
+    <div class="layui-container">
+        <table id="fourthTable" class="layui-hide" lay-filter="fourthFilter"></table>
+    </div>
+    <div style="display: none" id="fourthButton">
+
+        <button  type="button" class="layui-btn layui-btn-sm" lay-event="fourthGrantEvent">授权</button>
+</div>
+</div>
+</body>
+</html>
